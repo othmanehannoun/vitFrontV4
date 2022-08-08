@@ -1,15 +1,14 @@
 import React , {useState,useEffect} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
 import AppNavigation from './src/navigation/AppRoute'
 import { Provider } from 'react-redux';
 import store from './src/Redux/store';
 import NoConnectionScreen from "./src/screens/NoConnectionScreen";
 import NetInfo from '@react-native-community/netinfo';
 
-export default function App() {
-  const [connectStatus,setConnectStatus] = useState(false)
 
+export default function App() {
+
+  const [connectStatus,setConnectStatus] = useState(false)
 
   useEffect(() => {
     const data = NetInfo.addEventListener(state => {
@@ -23,14 +22,17 @@ export default function App() {
   
 
   return (
-    connectStatus?
-        <Provider store={store}>
-          <AppNavigation />
-        </Provider>
-        :
-        
-        <NoConnectionScreen />
+    connectStatus ?
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
+      :
+      
+      <NoConnectionScreen />
+
       
   );
 }
+
+
 

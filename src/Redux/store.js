@@ -4,6 +4,7 @@ import user from './Slices/UserSlice'
 import cartReducer from './Slices/CartSlice'
 // import saladCartReducer from './Slices/SaladSlice'
 import saladCart from './Slices/SaladSlice'
+import codePromo from './Slices/CodePromoSlice'
 import order from './Slices/OrderSlice'
 import transfer from './Slices/TransferSlice'
 
@@ -16,6 +17,7 @@ export default configureStore({
         cart: cartReducer,
         // saladCart: saladCartReducer,
         saladCart,
+        codePromo,
         order,
         transfer
     }

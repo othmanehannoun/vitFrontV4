@@ -23,7 +23,8 @@ const initialState = {
     isLoading_S: false,
     isError_S: false,
     isSuccess_S : false,
-
+// GET USER
+    getUser: null,
     isLoggedIn: false,
   
 
@@ -121,6 +122,8 @@ export const Login = createAsyncThunk(
               _id: response._id,
               role: response.role,
               token: response.token,
+              Point_Fidilite: response.Point_Fidilite,
+              solde_vitamix: response.solde_vitamix
             };
             await storeData(loginObjectResponse);
             const userObject = await getDataFromStorage();
@@ -149,6 +152,7 @@ export const Login = createAsyncThunk(
 
 export const Get_User = createAsyncThunk(
     'user/Get_User', async(id, thunkAPI)=>{
+        console.log("EE", id);
        const {rejectWithValue} = thunkAPI
        try{
            const res = await UserApi.GetUser(id);
@@ -156,6 +160,7 @@ export const Get_User = createAsyncThunk(
            return res
        }
        catch(error){
+           console.log(error.response.data);
            return rejectWithValue(error.response.data) 
        }
 })
@@ -276,7 +281,7 @@ const CategorySlice = createSlice({
          [Get_User.fulfilled]: (state, action) =>{
              state.isLoading = false
              state.isSuccess = true
-             state.user = action.payload
+             state.getuUser = action.payload
          },
         
         // LogOut -------------------------------------------------------------------

@@ -59,7 +59,7 @@ const Products = ({navigation, route}) => {
   // }, [cart, itemKEY])
 
   const handleSetItemId = async(id, name) =>{
-    console.log(id, name)
+    // console.log(id, name)
     await setItemId(id)
     await setItem_Name(name)
   }
@@ -85,7 +85,7 @@ const Products = ({navigation, route}) => {
   return (
     <View style={styles.container}>
         <ImageBackground source={masques} resizeMode={'cover'} style={{flex: 1}}>
-        <Menu navigation = {navigation} />
+          <Menu navigation = {navigation} />
 
           <View style={{paddingVertical: 15, 
             backgroundColor: SECONDARY_COLOR, borderColor: LIGHT_COLOR,
@@ -181,7 +181,7 @@ const Products = ({navigation, route}) => {
           
                 } 
               </View>
-            :
+             :
 
               <View style={{padding: 20, flex: 1}}>  
                     {

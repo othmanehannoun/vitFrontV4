@@ -50,7 +50,8 @@ const LoginScreen = ({navigation}) => {
 
     (async()=>{
       if(user || LoginSuccess){
-        setVisible(true)
+        // setVisible(true)
+        console.log('Success')
       }
       if(!user && LoginError){
         setReqMessage(message)

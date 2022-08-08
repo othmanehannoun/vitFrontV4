@@ -24,7 +24,7 @@ const getSubCByCategory = async(id) => {
 };
 
 const getProductByCategory = async(id) => {
-    console.log('id', id);
+    // console.log('id', id);
         const response = await axios.get(`${endPoint}/api/product/getProductByCategory/${id}`) 
         const data = response.data;
           

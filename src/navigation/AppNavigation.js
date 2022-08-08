@@ -18,6 +18,8 @@ import {useDispatch, useSelector } from 'react-redux';
 import {addToken} from '../Redux/Slices/UserSlice'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AddBeneficiary from '../components/AddBeneficiary';
+import PayWith from '../screens/PayWith';
+import SuccessPage from '../screens/SuccessPage';
 
 const Stack = createStackNavigator()
 
@@ -55,6 +57,8 @@ const AppNavigator = () =>{
             <Stack.Screen name="details" component={DetailsProducts} />
             <Stack.Screen name="confimerOrder" component={OrderConfirmation} />
             <Stack.Screen name="redudxApp" component={TestReduxApp} />
+            <Stack.Screen name="bayWith" component={PayWith} />
+            <Stack.Screen name="successPage" component={SuccessPage} />
             <Stack.Screen name="main" component={DrowerNavigator} />
       </Stack.Navigator>
       // </NavigationContainer>

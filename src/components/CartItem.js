@@ -6,13 +6,14 @@ import pollo from '../../assets/images/calzon/Pollo.jpg'
 import { LIGHT_COLOR, PRIMARY_COLOR, WHITE } from '../constants/StyleColor'
 import { useDispatch, useSelector } from 'react-redux'
 import { increament, decrement} from '../Redux/Slices/CartSlice'
+import { endPoint } from '../constants/GlobaleVariables';
 
 const CartItem = ({products, subTotal}) => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
         
-    }, [products, subTotal])
+    }, [products])
 
     const HandleIncreament = (id) =>{
         dispatch(increament(id))
@@ -33,7 +34,11 @@ const CartItem = ({products, subTotal}) => {
 
                         <View style={styles.box}>
                             <View style={styles.item}>
-                                <Image source={pollo} style={{height: 80, width: '100%', borderRadius:10}}/>
+                                <Image source={
+                                {
+                                uri: `${endPoint}/${item.img}`
+                                }
+                            }  style={{height: 80, width: '100%', borderRadius:10}}/>
                             </View>
                         </View>
 
@@ -77,16 +82,16 @@ const CartItem = ({products, subTotal}) => {
             }
 
         </ScrollView>
-
+{/* 
         <Text style={{
             color:PRIMARY_COLOR, 
             fontWeight:'bold', 
             marginTop: 20,
-            marginBottom: 20
+            marginBottom: 10
             }}
         >
-            Summury: AED {subTotal.toFixed(2)}
-        </Text>
+            Summury: {subTotal.toFixed(2)} DH
+        </Text> */}
 
       </>
    

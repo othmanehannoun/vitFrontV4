@@ -15,7 +15,7 @@ import { windowHeight, windowWidth } from '../constants/Demonsions'
 import { useDispatch, useSelector } from 'react-redux'
 import { InsertUser, reset } from '../Redux/Slices/UserSlice'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-
+import SocialButton from '../components/SocialButton'
 import ErrorModal from '../components/Modal/ErrorModal'
 
 import Input from '../components/Input'
@@ -137,22 +137,27 @@ const SinupScreen = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            padding:20
+            paddingHorizontal:20
           }}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.btnSocailMedia}>
-            <FontAwesome name="google" size={24} color={'green'} />
-           {/* <Text> google</Text> */}
-          </TouchableOpacity>
+         {Platform.OS === 'android' ? (
+                <View style={{flexDirection: 'row', justifyContent:'space-between', paddingVertical: 20}}>
+                  <SocialButton
+                    buttonTitle="Sign In with Facebook"
+                    btnType="facebook"
+                    color="#4867aa"
+                    backgroundColor="#e6eaf4"
+                    // onPress={() => fbLogin()}
+                  />
 
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.btnSocailMedia}>
-            <FontAwesome name="facebook" size={24} color={'blue'} />
-            {/* <Text>facebook</Text> */}
-          </TouchableOpacity>
-        
+                  <SocialButton
+                    buttonTitle="Sign In with Google"
+                    btnType="google"
+                    color="#de4d41"
+                    backgroundColor="#f5e7ea"
+                    // onPress={() => googleLogin()}
+                  />
+                </View>
+              ) : null}
         </View>
 
           <KeyboardAvoidingView style={{flex:1}}>

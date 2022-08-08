@@ -12,15 +12,19 @@ import { getOrder } from '../Redux/Slices/OrderSlice'
 
 
 const OrderConfirmation = ({navigation, route}) => {
-    const id = route.params.id
-    // console.log('dddddddddddd', id)
+    // const id = route.params.id
+
+    console.log(route.params);
 
     const dispatch = useDispatch()
     const { order, isLoading } = useSelector((state) => state.order);
     const [data, setData] = useState(null)
 
     useEffect(()=>{
-        dispatch(getOrder(id))
+        if(route.params != undefined){
+            dispatch(getOrder(route.params.id))
+        }
+        
     },[dispatch])
 
     useEffect(()=>{

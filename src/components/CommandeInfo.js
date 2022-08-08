@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const CommandeInfo = ({products, handleTotal, saladData, salad_price, setTotalSaladPrice1}) => {
  
-    console.log(handleTotal);
+    // console.log(handleTotal);
     const { Base, Ingredient, Sauce, Toppings } = useSelector((state) => state.saladCart);
 
     const [totalSaladPrice, setTotalSaladPrice] = useState(salad_price);

@@ -32,7 +32,7 @@ const cartSlice = createSlice({
     },
 
     increament(state, { payload }) {
-        console.log('PAAAY11', payload)
+        // console.log('PAAAY11', payload)
       return state.map((item) =>
         item._id === payload
           ? {
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
     },
    
     decrement(state, { payload }) {
-        console.log('PAAAY11', payload)
+        // console.log('PAAAY11', payload)
       return state.map((item) =>
         item._id === payload
           ? {

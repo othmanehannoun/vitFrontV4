@@ -85,7 +85,7 @@ const Products = ({navigation, route}) => {
   return (
     <View style={styles.container}>
         <ImageBackground source={masques} resizeMode={'cover'} style={{flex: 1}}>
-        <Menu navigation = {navigation} />
+          <Menu navigation = {navigation} />
 
           <View style={{paddingVertical: 15, 
             backgroundColor: SECONDARY_COLOR, borderColor: LIGHT_COLOR,
@@ -98,9 +98,8 @@ const Products = ({navigation, route}) => {
           </View>
 
           {
-
             item_Name == "SALADE" ?
-              <View style={{padding: 20, flex: 1}}>  
+              <View style={{flex: 1}}>  
                 {
                   subCategory.length > 0 ?
                 
@@ -111,7 +110,7 @@ const Products = ({navigation, route}) => {
                   
                     :
                     <>
-                      <View style={{flexDirection: 'row', width: "100%", marginBottom: 10}}>
+                      <View style={{flexDirection: 'row', width: "100%", paddingHorizontal: 20}}>
                         <View style={{width: "33.33%", padding: 5}}>
                             <TouchableOpacity 
                             onPress={()=> {setSalad_price(30)}}
@@ -151,13 +150,12 @@ const Products = ({navigation, route}) => {
 
                       </View>
                       
-                      <ScrollView nestedScrollEnabled={true}>
+                      <ScrollView nestedScrollEnabled={true} style={{paddingHorizontal: 20}}>
                         {
                           subCategory.map((item, index)=>(
                           
                               <View key={index}>
                                 <Text style={{color: PRIMARY_COLOR,
-                                  //  marginLeft: 10, 
                                   fontWeight: 'bold', 
                                   borderBottomWidth: 2, 
                                   borderBottomColor: PRIMARY_COLOR,
@@ -190,8 +188,7 @@ const Products = ({navigation, route}) => {
                 } 
               </View>
             :
-
-              <View style={{padding: 20, flex: 1}}>  
+              <View style={{flex: 1}}>  
                     {
                       subCategory.length > 0 ?
                     
@@ -200,7 +197,7 @@ const Products = ({navigation, route}) => {
                             <ActivityIndicator size="large" color={PRIMARY_COLOR} />
                         </View>
                         :
-                        <ScrollView nestedScrollEnabled={true} style={{ width: "100%" }}>
+                        <ScrollView nestedScrollEnabled={true} style={{padding: 20}}>
                           {
                             subCategory.map((item, index)=>(
                               
@@ -242,7 +239,6 @@ const Products = ({navigation, route}) => {
                     } 
               </View>
           }
-
 
             <View>
               <Text></Text>

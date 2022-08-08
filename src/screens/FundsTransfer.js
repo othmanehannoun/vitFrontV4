@@ -5,6 +5,8 @@ import transferLogo from  '../../assets/images/transferLogo.png'
 import { LIGHT_COLOR, PRIMARY_COLOR, WHITE } from '../constants/StyleColor'
 import { windowHeight, windowWidth } from '../constants/Demonsions'
 import Footer from '../components/Footer'
+import SuccessModal from '../components/Modal/SuccessModal'
+import ErrorModal from '../components/Modal/ErrorModal'
 
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +18,10 @@ import PushNotification from "react-native-push-notification";
 import io from 'socket.io-client';
 
 const FundsTransfer = ({navigation}) => {
+
+    const [visibleSuccess, setVisibleSuccess] = useState(false);
+    const [visible2, setVisible2] = useState(false);
+    const [reqMessage, setReqMessage] = useState(false);
 
     const [notification, setNotification] = useState(null)
     const socket = io('http://192.168.0.133:3001', { transports: ['websocket'] });
@@ -109,18 +115,23 @@ const FundsTransfer = ({navigation}) => {
 
 
     useEffect(()=>{
-
+        const resetData = ()=>{
+            inputs.username_Beneficiary = ''
+            inputs.userId = ''
+            inputs.point = null
+        }
       
             if(isSuccess){
-                 alert('Success')
-                 socket.emit('sendFriendReques', inputs)
+                setReqMessage('Ensuite, envoyer les points avec succès')
+                setVisibleSuccess(true)
+                socket.emit('sendFriendReques', inputs)
 
-                // inputs.username_Beneficiary = ''
-                // inputs.userId = ''
-                // inputs.point = null
+                resetData()
               }
               if(isError){
-                alert("AZERTY", message)
+                // alert("AZERTY", message)
+                setReqMessage(message)
+                setVisible2(true)
               }
 
               dispatch(reset())
@@ -298,6 +309,19 @@ const FundsTransfer = ({navigation}) => {
           </KeyboardAvoidingView>
           
           <Footer />
+
+          
+        <SuccessModal 
+         visible = {visibleSuccess}
+         setVisible = {setVisibleSuccess}
+         message = {reqMessage}
+        />
+
+         <ErrorModal 
+          visible = {visible2}
+          setVisible = {setVisible2}
+          message = {reqMessage}
+        />
         </ImageBackground>
       
     </View>

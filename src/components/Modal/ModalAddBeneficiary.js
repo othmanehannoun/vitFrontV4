@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { StyleSheet, Text, View,Modal,TextInput,TouchableWithoutFeedback, Dimensions } from 'react-native'
+import { StyleSheet, Text, View,Modal,TextInput,TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
 import { PRIMARY_COLOR, WHITE } from '../../constants/StyleColor'
 import Button from '../Button'
 import Input from '../Input'
@@ -14,9 +14,13 @@ import ErrorModal from './ErrorModal'
 
 const ModalAddBeneficiary = ({navigation, isOpenedModalAdd, setIsOpenedModalAdd, userID}) => {
 
-  const [visible1, setVisible1] = useState(false);
+  // const [visible1, setVisible1] = useState(false);
+  // const [visible2, setVisible2] = useState(false);
+  // const [reqMesage, setReqMesage] = useState(false);
+
+  const [visibleSuccess, setVisibleSuccess] = useState(false);
   const [visible2, setVisible2] = useState(false);
-  const [reqMesage, setReqMesage] = useState(false);
+  const [reqMessage, setReqMessage] = useState(false);
 
   // console.log(navigation);
   const dispatch = useDispatch()
@@ -60,17 +64,22 @@ const ModalAddBeneficiary = ({navigation, isOpenedModalAdd, setIsOpenedModalAdd,
        
         if(isSuccess_b){
             inputs.id_user_beneficiary = "",
-            inputs.username_Beneficiary = "",
-            setVisible1(true)
-            // alert('Ajouter new bénéficiare Success')
-            setIsOpenedModalAdd(false)
+            inputs.username_Beneficiary = ""
+
+            // setVisible1(true)
+            setReqMessage('Ajouter new bénéficiare Success')
+            setVisibleSuccess(true)
+            // setIsOpenedModalAdd(false)
         }
         if(isError_b){
-          setReqMesage(message)
+          // setReqMesage(message)
+          // setVisible2(true)
+          setReqMessage(message)
           setVisible2(true)
+          // alert('WAAAAAAASHHHHH')
         }
         dispatch(reset())
-        console.log(message)
+        // console.log(message)
     }, [isError_b, isSuccess_b, message, dispatch])
 
      
@@ -138,14 +147,15 @@ const ModalAddBeneficiary = ({navigation, isOpenedModalAdd, setIsOpenedModalAdd,
         </Modal>
 
         <SuccessModal 
-          visible = {visible1}
-          setVisible = {setVisible1}
-          message = {reqMesage}
+         visible = {visibleSuccess}
+         setVisible = {setVisibleSuccess}
+         message = {reqMessage}
         />
-        <ErrorModal 
+
+         <ErrorModal 
           visible = {visible2}
           setVisible = {setVisible2}
-          message = {reqMesage}
+          message = {reqMessage}
         />
 
       </>

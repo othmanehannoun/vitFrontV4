@@ -10,6 +10,7 @@ const initialState = {
   user_order: [],
   isLoading: false,
   isError: false,
+  isSuccess: false,
   message: null,
 }
 
@@ -23,6 +24,20 @@ export const AddOrder = createAsyncThunk(
     catch(error){
         return rejectWithValue(error.response.data) 
     }
+})
+
+export const updateSoldVitamix = createAsyncThunk(
+    'order/updateSoldVitamix', async(data, thunkAPI)=>{
+       
+       const {rejectWithValue} = thunkAPI
+       try{
+           const res = await OrderApi.UpdateUserSoldVitamix(data);
+           return res
+       }
+       catch(error){
+          
+           return rejectWithValue(error.response.data) 
+       }
 })
 
 export const getOrder = createAsyncThunk(
@@ -58,16 +73,19 @@ export const getOrderByUserID = createAsyncThunk(
 const OrderSlice = createSlice({
     name : "order",
     initialState,
-    // reducers:{
-    //     reset: (state) =>{
-    //         state.isLoading = false
-    //         state.isError = false
-    //         state.isSuccess = false
-    //         state.message = null
-    //     }
-    // },
+    reducers:{
+        reset: (state) =>{
+            state.order = null
+            state.orders = []
+            state.user_order = []
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = false
+            state.message = null
+        }
+    },
     extraReducers:{
-        // ADD Order
+        // ADD Order-------------------------------
         [AddOrder.pending]: (state, action) =>{
            state.isLoading = true
         },
@@ -79,7 +97,20 @@ const OrderSlice = createSlice({
             state.isLoading = false
             state.message = action.payload
         },
-         // Get One Order by Id 
+        // Update user Solde vitamix--------------------------
+        [updateSoldVitamix.pending]: (state, action) =>{
+            state.isLoading = true
+         },
+         [updateSoldVitamix.fulfilled]: (state, action) =>{
+             state.isLoading = false
+             state.isSuccess = true
+         },
+         [updateSoldVitamix.rejected]: (state, action) =>{
+             state.isLoading = false
+             state.isError = true
+             state.message = action.payload
+         },
+         // Get One Order by Id -----------------------------------
          [getOrder.pending]: (state, action) =>{
             state.isLoading = true
          },
@@ -92,13 +123,12 @@ const OrderSlice = createSlice({
              state.message = action.payload
          },
 
-         // Get One Order by Id 
+         // Get One Order by Id ------------------------------
          [getOrderByUserID.pending]: (state, action) =>{
             state.isLoading = true
          },
          [getOrderByUserID.fulfilled]: (state, action) =>{
              state.isLoading = false
-            //  console.log('action.payload', action.payload)
              state.user_order = action.payload
          },
          [getOrderByUserID.rejected]: (state, action) =>{
@@ -109,5 +139,5 @@ const OrderSlice = createSlice({
     }
 })
 
-// export const { reset} = CategorySlice.actions
+export const { reset} = OrderSlice.actions
 export default OrderSlice.reducer

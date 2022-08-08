@@ -51,6 +51,7 @@ const GetUser = async(id) => {
     
     let response = await axios.post( endPoint + `/api/user`, id)
     const json = response.data
+    console.log('RR', json);
 
     return json;
         
